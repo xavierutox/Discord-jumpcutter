@@ -110,7 +110,7 @@ async def testmain(message,nombre):
     #subprocess.call("ffmpeg -y  -i archivo.mp4 -filter:v fps=fps=25 archivo25.mp4",shell=True)
     #videoFile="archivo25.mp4"
     try:
-        subprocess.call("python3 splitter.py -f "+videoFile+" -s 60 -v libx264 ",shell=True)
+        subprocess.call("python3 splitter.py -f "+videoFile+" -s 60 -v h264 ",shell=True)
 
         f = sorted(glob.glob("output/*.mp4"))
         await message.edit(content="<@"+ str(message.author.id) + "> Se procesaran "+str(len(f))+" segmentos")
@@ -141,7 +141,7 @@ async def testmainyt(message,nombre,path):
     #subprocess.call("ffmpeg -y -i "+videoFile+" -filter:v fps=fps=25 archivo25.mp4",shell=True)
     #videoFile="archivo25.mp4"
     try:
-        subprocess.call("python3 splitter.py -f "+videoFile+" -s 60 -v libx264",shell=True)
+        subprocess.call("python3 splitter.py -f "+videoFile+" -s 60 -v h264",shell=True)
 
         f = sorted(glob.glob("output/*.mp4"))
         await message.edit(content="<@"+ str(message.author.id) + "> Se procesaran "+str(len(f))+" segmentos")
