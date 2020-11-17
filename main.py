@@ -60,6 +60,7 @@ createPath("out")
 nombre="procesado.mp4"
 test = None
 videoFile="archivo.mp4"
+
 try:
     subprocess.call("python3 splitter.py -f "+videoFile+" -s 1000",shell=True)
 

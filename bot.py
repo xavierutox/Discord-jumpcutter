@@ -107,8 +107,8 @@ async def testmain(message,nombre):
     createPath("out")
     test = None
     videoFile="archivo.mp4"
-    #subprocess.call("ffmpeg -y  -i archivo.mp4 -filter:v fps=fps=25 archivo25.mp4",shell=True)
-    #videoFile="archivo25.mp4"
+    subprocess.call("ffmpeg -y  -i archivo.mp4 -filter:v fps=fps=25 archivo25.mp4",shell=True)
+    videoFile="archivo25.mp4"
     try:
         subprocess.call("python3 splitter.py -f "+videoFile+" -s 60 -v h264 ",shell=True)
 
@@ -138,8 +138,8 @@ async def testmainyt(message,nombre,path):
     createPath("out")
     test = None
     videoFile=path
-    #subprocess.call("ffmpeg -y -i "+videoFile+" -filter:v fps=fps=25 archivo25.mp4",shell=True)
-    #videoFile="archivo25.mp4"
+    subprocess.call("ffmpeg -y -i "+videoFile+" -filter:v fps=fps=25 archivo25.mp4",shell=True)
+    videoFile="archivo25.mp4"
     try:
         subprocess.call("python3 splitter.py -f "+videoFile+" -s 60 -v h264",shell=True)
 
@@ -191,9 +191,9 @@ async def on_message(message):
             await msg.edit(content=response)
             working=False
         else:
-            msg=await message.channel.send("<@"+ str(message.author.id) + "> Me encuentro procesando otro video en este momento. Volvere a intentarlo cada 10minutos a partir de ahora")
+            msg=await message.channel.send("<@"+ str(message.author.id) + "> Me encuentro procesando otro video en este momento. Volvere a intentarlo cada minuto a partir de ahora")
             while working==True:
-                await asyncio.sleep(600)
+                await asyncio.sleep(60)
                 print("reitentando")
             print("ahora se puede ejecutar")
             working=True
@@ -216,9 +216,9 @@ async def on_message(message):
             await msg.edit(content=response)
             working=False
         else:
-            msg=await message.channel.send("<@"+ str(message.author.id) + "> Me encuentro procesando otro video en este momento. Volvere a intentarlo cada 10minutos a partir de ahora")
+            msg=await message.channel.send("<@"+ str(message.author.id) + "> Me encuentro procesando otro video en este momento. Volvere a intentarlo cada minuto a partir de ahora")
             while working==True:
-                await asyncio.sleep(600)
+                await asyncio.sleep(60)
                 print("reitentando")
             working=True
             await msg.edit(content="<@"+ str(message.author.id) + "> Se va a descargar tu archivo")
@@ -242,9 +242,9 @@ async def on_message(message):
             await msg.edit(content=response)
             working=False
         else:
-            msg=await message.channel.send("<@"+ str(message.author.id) + "> Me encuentro procesando otro video en este momento. Volvere a intentarlo cada 10minutos a partir de ahora")
+            msg=await message.channel.send("<@"+ str(message.author.id) + "> Me encuentro procesando otro video en este momento. Volvere a intentarlo cada minuto a partir de ahora")
             while working==True:
-                await asyncio.sleep(600)
+                await asyncio.sleep(60)
                 print("reitentando")
             working=True
             await msg.edit(content="<@"+ str(message.author.id) + "> Se va a descargar tu archivo")
@@ -252,7 +252,7 @@ async def on_message(message):
             link = menlist[1]  
             link=link.replace("https://drive.google.com/file/d/","https://drive.google.com/uc?export=download&id=")
             link = link.replace("/view?usp=sharing","")
-            Url = await yt(link,msg,filename,filepath,targetfile)
+            Url = await gd(link,msg,filename,filepath,targetfile)
             response = "Se proceso tu archivo, este es el link de descarga: "+Url
             await msg.edit(content=response)
             working=False
